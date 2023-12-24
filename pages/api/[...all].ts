@@ -24,6 +24,8 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
         "appid=",
         `appid=${process.env.OWM_API_KEY}`
       );
+      proxyReq.setHeader('x-forwarded-port', '443');
+      proxyReq.setHeader('x-forwarded-proto', 'https');
       console.log(proxyReq.path);
     });
     proxy.once("proxyRes", resolve);
